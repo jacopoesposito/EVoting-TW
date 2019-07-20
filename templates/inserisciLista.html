@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-xl-6 col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-3 offset-lg-4 offset-xl-3 p-3">
+            <form action="{{ url_for('insertLista') }}" method="post">
+                <label for="InserisciNomeLista" class="text-white">Nome Lista:</label>
+                <input type="text" class="form-control" id="InserisciNomeLista" name="formInserisciNomeLista" placeholder="Nome Lista" required>
+                <label for="InserisciLogoLista" class="text-white mt-3">Logo Lista:</label>
+                <input type="url" class="form-control" id="InserisciLogoLista" name="formInserisciLogoLista" placeholder="Inserisci link logo lista" required>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Invia</button>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                {% if message != 'o' %}
+                <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

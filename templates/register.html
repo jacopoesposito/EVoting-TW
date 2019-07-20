@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrati - eVotingUniparthenope</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/styles/register.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-4 offset-lg-7 mt-3">
+            <div class="card card-container">
+                <!-- <img class="pr+ofile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+                <img id="profile-img" class="profile-img-card" src="../static/images/elections-icon.gif" />
+                <p id="profile-name" class="profile-name-card"></p>
+                <form action="{{ url_for('insertUser') }}" class="form-signin" method="POST">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <input type="text" id="nome"  name="nome" class="form-control" placeholder="Nome" required>
+                    <input type="text" id="cognome" name="cognome" class="form-control mt-2" placeholder="Cognome" required>
+                    <input type="password" id="inputPassword" name="inputPassword" class="form-control mt-2" placeholder="Password" required>
+                    <input type="password" id="reInputPassword" name="reInputPassword" class="form-control" placeholder="Riscrivi Password" required>
+                    <input type="date" id="inputDate" name="date" class="form-control" placeholder="Inserisci Data" required>
+                    <button class="btn btn-lg btn-primary btn-block btn-signup mt-2" type="submit" onkeyup="validatePassword()">Registrati</button>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    {% if message != '' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                    {% endif %}
+                </form><!-- /form -->
+                <a href="{{ url_for('login') }}" class="signin">
+                    Già registrato? Esegui il login.
+                </a>
+
+            </div><!-- /card-container -->
+        </div>
+        </div>
+    </div><!-- /container -->
+
+    <script>
+        var password = document.getElementById("inputPassword"), confirm_password = document.getElementById("reInputPassword");
+            function validatePassword(){
+              if(password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Le password non corrispondono");
+              } else {
+                confirm_password.setCustomValidity('');
+              }
+            }
+
+            password.onchange = validatePassword;
+            confirm_password.onkeyup = validatePassword;
+    </script>
+
+</body>
+</html>

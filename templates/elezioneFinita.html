@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+    <div class="container-fluid">
+        <div class="card-deck p-3">
+            <div class="container-fluid">
+                <div class="row">
+                    {% for l in liste %}
+                    <div class="col-12 col-xl-3 col-lg-4 col-md-4 col-sm-6 mb-3">
+                        <div class="card text-dark bg-light h-100">
+                                  <img class="card-img-top" src="{{ l.Lista.LOGO_LISTA|e }}" alt="card img cap">
+                                    <div class="card-body">
+                                        <div class="text-dark">
+                                            <p>{{'Numero voti lista:'+' '+l.conteggio_voti_l.NUMERO_VOTI_L|e }}</p>
+                                        </div>
+
+
+                                        {% for c in candidati %}
+
+                                            {% if c.Candidato.FK_ID_LISTA == l.Lista.ID_LISTA %}
+                                            <div class="text-dark">
+                                                <p>{{ c.NOME|e + ' ' + c.COGNOME|e + ':' + c.conteggio_voti_c.NUMERO_VOTI_C|e }}</p>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

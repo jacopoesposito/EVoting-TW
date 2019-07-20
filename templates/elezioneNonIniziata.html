@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 mx-auto p-3">
+                    <div class="card text-dark bg-light h-100">
+                        <img class="card-img-top" src="../static/images/copertineElezioni/giovani.jpg" alt="card img cap">
+                            <div class="card-body">
+                              <h5 class="card-title">La seguente elezione non è ancora iniziata: {{ g.elezione.DESCRIZIONE_ELEZIONE }}</h5>
+                              <p class="card-text"><small class="text-muted">Inizierà il: {{ g.elezione.DATA_IN }}</small></p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</body>
+
+{% endblock %}

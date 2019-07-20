@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-xl-6 col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-3 offset-lg-4 offset-xl-3 p-3">
+            <form action="{{ url_for('insertListaElezione') }}" method="post">
+                <select id="select-lista" name="select-lista" class="custom-select" required>
+                  <option selected>Seleziona una lista</option>
+                    {% for l in liste_list %}
+                        <option value="{{ l.ID_LISTA|e }}">{{ l.NOME_LISTA|e }}</option>
+                    {% endfor %}
+                 </select>
+                <select id="select-elezione" name="select-elezione" class="custom-select mt-3" required>
+                    <option selected>Selezione un Elezione</option>
+                    {% for e in elezione_list %}
+                        <option value="{{ e.ID_ELEZIONE|e }}">{{ e.DESCRIZIONE_ELEZIONE|e }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary mt-3 btn-block">Inserisci</button>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                {% if message != 'o' %}
+                <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
